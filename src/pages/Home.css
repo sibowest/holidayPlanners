@@ -1,0 +1,305 @@
+.slides{
+    /* background-color: #C29D59; */
+    width: 100%;
+    height: 60rem;
+    background-image: url('../assets/mainBack1.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .allNav{
+    display: fixed;
+} */
+.navBar{
+    position: fixed!important;
+    background: #2B2B2B;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px;
+    width: 100%;
+    height: 4rem;
+    color: #FFFFFF;
+    z-index: 1;
+}
+span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+}
+.icons{
+    color: #C29D59;
+    font-size: 2rem;
+    padding: 5px;
+}
+.sp1{
+    /* background-color: rgb(139, 197, 179); */
+    width: 35%;
+    height: 5rem;
+    display: flex;
+    justify-content: flex-end;
+    /* border-right: 1px solid red; */
+}
+.sp2{
+    /* background-color: rgb(127, 225, 255); */
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    border-left: 1px solid grey;
+    height: 5rem;
+}
+
+.sp4{
+    /* background-color: tomato; */
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    height: 5rem;
+}
+.sp5{
+    /* background-color: aquamarine; */
+    width: 10%;
+    display: flex;
+    justify-content: flex-start;
+}
+.co3, .co4, .co5{
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    height: 6.5rem;
+}
+.co1{
+    /* background-color: #42ad8a; */
+    width: 40%;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+.co2{
+    /* background-color: #42ad8a; */
+    width: 20%;
+    height: 3.5rem;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 1rem;
+}
+
+.cont:hover{
+    background-color: #FFFFFF;
+    color: #000;
+    cursor: pointer;
+    /* border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; */
+}
+.subNav{
+    position: fixed!important;
+    background-color: #FFFFFF;
+    display: flex;
+    /* justify-content: space-between; */
+    /* padding-top: 1.5rem; */
+    width: 90%;
+    height: 7rem;
+    left: 5rem;
+    top: 3rem;
+    color: #FFFFFF;
+    z-index: 1;
+    box-shadow: 0px 1px 10px #2b2b2b23;
+}
+.logo{
+    /* background-color: blue; */
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 5px;
+    padding-top: 1rem;
+    cursor: pointer;
+}
+.but1{
+    /* background-color: aquamarine; */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+.but11{
+    /* background-color: red; */
+    color: #FFFFFF;
+    text-transform: uppercase;
+    width: 95%;
+    height: 3rem;
+    background-color: #C29D59;
+    border: none;
+    border-radius: 5px;
+}
+.but11:hover{
+    background-color: #000;
+    cursor: pointer;
+}
+.icSearch{
+    /* background-color: rgb(244, 127, 255); */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+}
+.search{
+    color: #000;
+    font-size: 3rem;
+    cursor: pointer;
+}
+.but3bar{
+    /* background-color: rgb(4, 83, 57); */
+    width: 10%;
+    /* color: #FFFFFF; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+.but12{
+    border-radius: 50%;
+    background-color: #C29D59;
+    border: none;
+    cursor: pointer;
+}
+.but12:hover{
+    background-color: #c29d59e0;
+    color: #000!important;
+    transition-delay: 0.2s;
+}
+.fbar{
+    /* background-color: #C29D59; */
+    color: #FFFFFF;
+    /* font-size: 2rem; */
+    /* background-color: #C29D59; */
+    width: 30%;
+    height: 3rem;
+    border-radius: 50%;
+    z-index: 1;
+}
+.description{
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 20rem;
+    color: #FFFFFF;
+    user-select: none;
+}
+.descri{
+    font-size: 4rem;
+}
+.d2{
+    background-color: #c29d59d2;
+    border-radius: 5px;
+}
+.descri3{
+    font-family: arial, sans-serif;
+    line-height: 2;
+    /* padding-left: 40px; */
+    /* background-color: #000; */
+    width: 33rem;
+    text-align: center;
+}
+.mainTab{
+    background-color: #2B2B2B;
+    /* color: grey; */
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    top: 3rem;
+    left: 0;
+    width: 100%;
+    height: 50rem;
+    z-index: 1;
+    padding-top: 15rem;
+    
+    /* display: none; */
+
+}
+.webSections{
+    background-color: #393939;
+    display: flex;
+    justify-content: flex-start;
+    width: 40%;
+    height: 20rem;
+    padding: 0 0 0 5rem;
+    /* position: absolute; */
+}
+.sectionlist{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 5px;
+}
+
+.sectionlist li{
+    font-size: x-large;
+    padding: 5px;
+    cursor: pointer;
+}
+.iconLogo{
+    position: absolute;
+    top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10rem;
+    padding: 50px;
+    /* background-color: green; */
+}
+.log{
+    /* background-color: rgb(174, 199, 174); */
+    width: 25%;
+    height: 10rem;
+    padding: 3.5rem ;
+}
+.imlogo{
+    width: 100%;
+    height: 6rem;
+    /* background-color: #000; */
+    cursor: pointer;
+}
+.closeIcon{
+    /* background-color: #C29D59; */
+    width: 4%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.5rem;
+}
+.close{
+    /* background-color: #FFFFFF; */
+    color: #ffffffd3;
+    border: none;
+    width: 100%;
+    height: 3rem;
+    cursor: pointer;   
+}
+.close:hover{
+    color: #FFFFFF;
+}
+
+.select{
+    background-color: transparent;
+    border: none;
+    width: 10%;
+    color: #FFFFFF;
+}
