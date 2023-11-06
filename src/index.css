@@ -1,8 +1,13 @@
+:root{
+  --font-family:'titillium web';
+}
+
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   user-select: none;
+  --font-family: 'titillium web';
 }
 .sectionLinks{
   text-decoration: none;

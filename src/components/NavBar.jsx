@@ -25,7 +25,7 @@ export default function NavBar() {
     <>
     <div className="allNav">
         <div className="navBar">
-                    <span className='span-title sp1 hovering'><span className='co1'><FaRegEnvelope className='icons hov'/><p className='hov'>Holidayplanners@gmail.com</p></span></span>
+                    <span className='span-title sp1 hovering'><span className='cont co1'><FaRegEnvelope className='icons hov'/><p className='hov'>Holidayplanners@gmail.com</p></span></span>
                     <span className='span-title sp2 hovering'><span className="cont co2"><BsFillTelephoneFill className='icons hov'/><p className='hov'>+250 783955044</p></span></span>
                     <span className='span-title sp3 hovering'><span className="cont co3"><FaFacebookF className='icons hov'/></span></span>
                     <span className='span-title sp4 hovering'><span className="cont co4"><FaInstagram className='icons hov'/></span></span>
