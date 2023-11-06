@@ -49,7 +49,7 @@ export default function DashMain() {
         backgroundColor: '#C29D59',
       },
     ],
-  };
+  }
   const pieData = {
     // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -88,7 +88,7 @@ export default function DashMain() {
         borderWidth: 1,
       },
     ],
-  };
+  }
   return (
     <>
     <div className="dashMain">

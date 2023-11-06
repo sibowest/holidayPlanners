@@ -2292,7 +2292,7 @@ margin-top: 20px;
 }
 .dashMain{
   background-color: #ffffff;
-  background-color: #b82121!important;
+  /* background-color: #b82121!important; */
   width: 80%;
   height: 42rem;
   padding: 10px;
@@ -5167,7 +5167,7 @@ span{
   }
   .dashMain{
     background-color: #ffffff!important;
-    /* background-color: #cc8809; */
+    background-color: #cc8809;
     width: 100%;
     height: 40rem;
     padding-bottom: 5rem!important;
@@ -10970,7 +10970,7 @@ span{
     background-color: #ffffff!important;
     /* background-color: #cc8809!important; */
     width: 100%;
-    height: 44rem;
+    height: 60rem;
     padding: 10px;
     position: fixed;
     top: 7rem;
