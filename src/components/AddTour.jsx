@@ -11,8 +11,16 @@ const AddTour = () => {
     const [image,setImage] = useState("");
     const [destination,setDestination] = useState("");
     const [duration, setDuration] = useState("");
-    const [groupSize, setGroupSize] = useState("")
+    const [groupSize, setGroupSize] = useState("");
     const [price,setPrice] = useState("");
+    const [discount,setDiscount] = useState("");
+    const [tourType,setTourType] = useState("");
+    const [departure,setDeparture] =useState("");
+    const [seats, setSeats] = useState("");
+    const [fromMonth, setFromMonth] = useState("");
+    const [toMonth,setToMonth] = useState("");
+    const [departureTime,setDepartureTime] = useState("");
+    const [returnTime, setReturnTime] = useState("");
     
     
     const handleImage = (e) => {
@@ -28,7 +36,14 @@ const AddTour = () => {
     formData.append("Duration",duration)
     formData.append("GroupSize", groupSize)
     formData.append("Price", price)
-     
+    formData.append("Discount",discount)
+    formData.append("TourType", tourType)
+    formData.append("Departure",departure)
+    formData.append("Seats",seats)
+    formData.append("fromMonth",fromMonth)
+    formData.append("toMonth",toMonth)
+    formData.append("departureTime",departureTime)
+    formData.append("ReturnTime",returnTime)
 
     const handleForm = (e) => {
         e.preventDefault();
@@ -58,7 +73,7 @@ const AddTour = () => {
     }
     return (
         <>
-        
+        {/* <div className="igitebo"> */}
         <form action="" className="addTourForm">
             <ToastContainer className="addtourtoast"/>
             <label htmlFor="">destination photo</label>
@@ -75,11 +90,27 @@ const AddTour = () => {
             
             <label htmlFor=""> price</label>
                 <input type="text" onChange={(e)=>{setPrice(e.target.value)}} placeholder="This is the title"/>
-        
+            <label>discount</label>   
+                <input type="text" onChange={(e)=>{setDiscount(e.target.value)}} placeholder="this is the reduction to your tour cost"/>
+            <label>type of tour</label>   
+                <input type="text" onChange={(e)=>{setTourType(e.target.value)}} placeholder="this is the type of your tour"/>
+            <label>departure</label>   
+                <input type="text" onChange={(e)=>{setDeparture(e.target.value)}} placeholder=""/>
+            <label>seats</label>   
+                <input type="text" onChange={(e)=>{setSeats(e.target.value)}} placeholder="how many seats do you need"/>
+            <label>from </label>   
+                <input type="text" onChange={(e)=>{setFromMonth(e.target.value)}} placeholder="when will you start your tour?"/>
+            <label>to</label>   
+                <input type="text" onChange={(e)=>{setToMonth(e.target.value)}} placeholder="until when?"/>
+            <label>time departure</label>   
+                <input type="text" onChange={(e)=>{setDepartureTime(e.target.value)}} placeholder="time of departure"/>
+            <label>the return time</label>   
+                <input type="text" onChange={(e)=>{setReturnTime(e.target.value)}} placeholder="when will you return?"/>
             {/* <label htmlFor="">phone</label>
             <input type="text" placeholder="Contact number"/> */}
             <button className="addTourbu" onClick={handleForm}>addtour</button>
         </form>
+        {/* </div> */}
         </>
     );
 }

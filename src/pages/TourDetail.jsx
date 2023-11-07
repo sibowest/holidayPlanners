@@ -46,6 +46,15 @@ export default function TourDetail() {
   const [duration, setDuration] = useState();
   const [groupSize, setGroupSize] = useState();
   const [price, setPrice] = useState();
+  const [discount,setDiscount] = useState("");
+  const [tourType,setTourType] = useState("");
+  const [departure,setDeparture] =useState("");
+  const [seats, setSeats] = useState("");
+  const [fromMonth, setFromMonth] = useState("");
+  const [toMonth,setToMonth] = useState("");
+  const [departureTime,setDepartureTime] = useState("");
+  const [returnTime, setReturnTime] = useState("");
+  
   const fetchTour = () => {
     let token = localStorage.getItem("token");
     axios({
@@ -63,6 +72,14 @@ export default function TourDetail() {
         setDuration(response?.data?.Duration);
         setGroupSize(response?.data?.GroupSize);
         setPrice(response?.data?.Price);
+        setDiscount(response?.data?.Discount);
+        setTourType(response?.data?.TourType);
+        setDeparture(response?.data?.Departure);
+        setSeats(response?.data?.Seats);
+        setFromMonth(response?.data?.fromMonth);
+        setToMonth(response?.data?.toMonth);
+        setDepartureTime(response?.data?.departureTime);
+        setReturnTime(response?.data?.ReturnTime);
         console.log(response);
       })
       .catch((error) => {
@@ -134,7 +151,7 @@ export default function TourDetail() {
       >
         <ToastContainer/>
         <div className="detailtour1">
-        <h1 className='detailtourHead'>{destination}</h1>
+        <h1 className='detailtourHead'>{title}</h1>
         </div>
       </div>
       <div className="detailmainTour">
@@ -151,33 +168,33 @@ export default function TourDetail() {
         <div className="detailTour">
           <div className="detailTour1">
             <h1 className="detailTour11">
-            A wonderful serenity has taken possession of my entire soul
+              {description}
             </h1>
             <div className="detailTour12">
-              <p className='detailTour121'>$1200</p>
+              <p className='detailTour121'>{price}</p>
               <div className="detailTour122"></div>
               <p className="detailTour123">per person</p>
             </div>
             <div className="detailTour124">
-              <p className='detailTour124p1'>22%</p>
+              <p className='detailTour124p1'>{discount}</p>
               <p className='detailTour124p2'>off</p>
             </div>
           </div>
           <div className="detailTour2">
             <ul className="detailTour21">
-              <li className="detailTour211"><AiFillClockCircle className='detsortlists'/>2 days</li>
-              <li className="detailTour211"><FaUserGroup className='detsortlists'/>6 people</li>
-              <li className="detailTour211"><FaUserPlus className='detsortlists'/>18</li>
-              <li className="detailTour211"><FaLocationDot className='detsortlists'/>greece</li>
+              <li className="detailTour211"><AiFillClockCircle className='detsortlists'/>{duration}</li>
+              <li className="detailTour211"><FaUserGroup className='detsortlists'/>{groupSize}</li>
+              <li className="detailTour211"><FaUserPlus className='detsortlists'/>{seats}seats</li>
+              <li className="detailTour211"><FaLocationDot className='detsortlists'/>{destination}</li>
               <li className="detailTour211"><FaSun className='detsortlists'/>descovery</li>
             </ul>
           </div>
           <div className="detailTour3">
             <p className="detailTour31">
-            I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams.
+              {description}
             </p>
             <p className="detailTour31">
-            I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath
+              {description}
             </p>
           </div>
           <div className="detailTour4">
@@ -189,19 +206,19 @@ export default function TourDetail() {
             <table className='detailTour51'>
               <tr className="detailTour52">
                 <td className='detailTour521 right'>destination</td>
-                <td className='detailTour521 left'>greece</td>
+                <td className='detailTour521 left'>{destination}</td>
               </tr>
               <tr className="detailTour52">
                 <td className='detailTour521 right'>departure</td>
-                <td className='detailTour521 left'>lorem ipsum</td>
+                <td className='detailTour521 left'>{departure}</td>
               </tr>
               <tr className="detailTour52">
                 <td className='detailTour521 right'>departure time</td>
-                <td className='detailTour521 left'>9:15 am to 9:30 am.</td>
+                <td className='detailTour521 left'>{departureTime}</td>
               </tr>
               <tr className="detailTour52">
                 <td className='detailTour521 right'>return time</td>
-                <td className='detailTour521 left'>approximately</td>
+                <td className='detailTour521 left'>{returnTime}approximately</td>
               </tr>
               <tr className="detailTour52">
                 <td className='detailTour521 right'>dress code</td>

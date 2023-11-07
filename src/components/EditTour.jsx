@@ -18,6 +18,14 @@ const EditTour = () => {
     const [duration, setDuration] = useState("");
     const [groupSize, setGroupSize] = useState("");
     const [price,setPrice] = useState("");
+    const [discount,setDiscount] = useState("");
+    const [tourType,setTourType] = useState("");
+    const [departure,setDeparture] =useState("");
+    const [seats, setSeats] = useState("");
+    const [fromMonth, setFromMonth] = useState("");
+    const [toMonth,setToMonth] = useState("");
+    const [departureTime,setDepartureTime] = useState("");
+    const [returnTime, setReturnTime] = useState("");
     const [initial,setInitial] = useState([]);
 
     
@@ -35,6 +43,14 @@ const EditTour = () => {
             setDuration(response?.data?.Duration)
             setGroupSize(response?.data?.GroupSize)
             setPrice(response?.data?.Price)
+            setDiscount(response?.data?.Discount);
+            setTourType(response?.data?.TourType);
+            setDeparture(response?.data?.Departure);
+            setSeats(response?.data?.Seats);
+            setFromMonth(response?.data?.fromMonth);
+            setToMonth(response?.data?.toMonth);
+            setDepartureTime(response?.data?.departureTime);
+            setReturnTime(response?.data?.returnTime);
             console.log(response)
         }).catch((error) =>{
             console.log(error)
@@ -64,6 +80,14 @@ const EditTour = () => {
         formData.append("Duration",duration);
         formData.append("GroupSize", groupSize);
         formData.append("Price", price);
+        formData.append("Discount",discount)
+        formData.append("TourType", tourType)
+        formData.append("Departure",departure)
+        formData.append("Seats",seats)
+        formData.append("fromMonth",fromMonth)
+        formData.append("toMonth",toMonth)
+        formData.append("departureTime",departureTime)
+        formData.append("ReturnTime",returnTime)
 
         axios({
             method: "PUT",
@@ -117,6 +141,40 @@ const EditTour = () => {
                 <input 
                 value={price}
                 type="text" onChange={(e)=>{setPrice(e.target.value)}} placeholder="This is the title"/>
+                
+            <label>discount</label>   
+                <input
+                value={discount}
+                type="text" onChange={(e)=>{setDiscount(e.target.value)}} placeholder="this is the reduction to your tour cost"/>
+            <label>type of tour</label>   
+                <input
+                value={tourType}
+                type="text" onChange={(e)=>{setTourType(e.target.value)}} placeholder="this is the type of your tour"/>
+            <label>departure</label>   
+                <input
+                value={departure}
+                type="text" onChange={(e)=>{setDeparture(e.target.value)}} placeholder=""/>
+            <label>seats</label>   
+                <input
+                value={seats}
+                type="text" onChange={(e)=>{setSeats(e.target.value)}} placeholder="how many seats do you need"/>
+            <label>from </label>   
+                <input
+                value={fromMonth}
+                type="text" onChange={(e)=>{setFromMonth(e.target.value)}} placeholder="when will you start your tour?"/>
+            <label>to</label>   
+                <input 
+                value={toMonth}
+                type="text" onChange={(e)=>{setToMonth(e.target.value)}} placeholder="until when?"/>
+            <label>time departure</label>   
+                <input
+                value={departureTime}
+                type="text" onChange={(e)=>{setDepartureTime(e.target.value)}} placeholder="time of departure"/>
+            <label>the return time</label>   
+                <input
+                value={returnTime}
+                type="text" onChange={(e)=>{setReturnTime(e.target.value)}} placeholder="when will you return?" />
+                
         
             {/* <label htmlFor="">phone</label>
             <input type="text" placeholder="Contact number"/> */}

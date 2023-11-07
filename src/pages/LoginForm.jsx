@@ -31,6 +31,15 @@ import 'react-toastify/dist/ReactToastify.css';
         console.log(Response)
           localStorage.setItem("token", Response.data.access_token);
           toast.success("Thanks for logging in!!!");
+
+          localStorage.setItem("user", JSON.stringify(Response.data.user));
+          console.log(
+            localStorage.getItem("user",JSON.stringify(Response.data.user))
+          )
+
+          localStorage.setItem("token",Response.data.access_token);
+          const token = localStorage.getItem("token");
+
           setTimeout(() =>{
             if(Response.data.user.role == "admin"){
               navigate("/dashBoard");
