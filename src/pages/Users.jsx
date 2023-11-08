@@ -14,8 +14,8 @@ export default function Users() {
   // const params = useParams()
   // let usersId = params.id;
 const navigate = useNavigate();
-const [tours, setTours] = useState([]);
 const [isFetch, setIsFetch] = useState(false);
+const [tours, setTours] = useState([]);
 
 let token = localStorage.getItem("token");
 

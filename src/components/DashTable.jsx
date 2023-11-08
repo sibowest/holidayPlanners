@@ -11,8 +11,9 @@ import { ToastContainer, toast } from 'react-toastify'
 
 export default function DashTable() {
 const navigate = useNavigate();
-const [tours, setTours] = useState([]);
 const [isFetch, setIsFetch] = useState(false);
+const [tours, setTours] = useState([]);
+
 
 let token = localStorage.getItem("token");
 

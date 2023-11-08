@@ -15,8 +15,8 @@ export default function Bookings() {
   // let usersId = params.id;
 
 const navigate = useNavigate();
-const [booking, setBooking] = useState([]);
 const [fetch, setIsFetch] = useState();
+const [booking, setBooking] = useState([]);
 
 let token = localStorage.getItem("token");
 

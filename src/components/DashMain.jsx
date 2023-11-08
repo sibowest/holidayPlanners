@@ -2,6 +2,8 @@ import React from 'react'
 import DashTable from './DashTable'
 import MainDashCards from '../components/MainDashCards'
 import { Pie } from 'react-chartjs-2';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { Chart as ChartJS,
   ArcElement,
@@ -13,6 +15,7 @@ import { Chart as ChartJS,
   Legend,
 } from "chart.js";
 import { Bar } from 'react-chartjs-2';
+import axios from 'axios';
 
 ChartJS.register(
   ArcElement,
@@ -26,6 +29,117 @@ ChartJS.register(
 
 export default function DashMain() {
 
+// display UsersCards
+
+const [users, setUsers] = useState([]);
+
+
+const fetchUsers = () => {
+  axios({
+    method:"GET",
+    url:"https://holiday-planner-4lnj.onrender.com/api/v1/auth/users",
+    headers:{
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) =>{
+    setUsers(response.data);
+    console.log(response)
+  })
+  .catch((error) =>{
+    console.log(error)
+    alert("Error showed up!!!");
+  })
+};
+
+useEffect(() =>{
+  fetchUsers()
+}, []);
+
+
+
+// 
+
+// display ToursCards
+
+const [tours, setTours] = useState([]);
+
+
+let token = localStorage.getItem("token");
+
+const fetchTours = () => {
+  axios({
+    method:"GET",
+    url:"https://holiday-planner-4lnj.onrender.com/api/v1/tour/",
+    headers:{
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) =>{
+    setTours(response.data);
+    console.log(response)
+  })
+  .catch((error) =>{
+    console.log(error)
+    alert("Error showed up!!!");
+  })
+};
+
+useEffect(() =>{
+  fetchTours()
+}, []);
+
+// 
+
+// display BookingCards
+
+const [fetch, setIsFetch] = useState();
+const [booking, setBooking] = useState([]);
+
+
+const fetchBooking = () => {
+  setIsFetch(true);
+  axios({
+    method:"GET",
+    url:"https://holiday-planner-4lnj.onrender.com/api/v1/booking/view",
+    headers:{
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) =>{
+    setBooking(response.data);
+    console.log(response)
+  })
+  .catch((error) =>{
+    console.log(error)
+    alert("Error showed up!!!");
+    toast.error(error.message);
+  });
+};
+
+useEffect(() =>{
+  fetchBooking()
+}, []);
+
+
+// 
+  const [year, setYear] = useState([]);
+  // const [count, setCount] = useState("");
+
+
+  const fetchYear = () =>{
+    axios({
+      method: "GET",
+      url:'https://holiday-planner-4lnj.onrender.com/api/v1/count?year=2023',
+    }).then((response) =>{
+      setYear(response.data)
+      // setCount(response.data)
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() =>{
+    fetchYear();
+  }, [])
   const options = {
     responsive: true,
     plugins: {
@@ -39,13 +153,18 @@ export default function DashMain() {
     },
     maintaninAspectRatio: false
   };
+  // function totalTour(tour){
+  //   result = sum(count);
+  // }
+  // let allTours = count;
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const data = {
     labels,
     datasets: [
       {
         label: 'Rate Of Users',
-        data: [80, 33.3, 63, 43, 77, 29, 54, 65, 90, 5, 21,69],
+        // data: [80, 33.3, 63, 43, 77, 29, 54, 65, 90, 5, 21,69],
+        data: year.map((umwaka) => umwaka.count),
         backgroundColor: '#C29D59',
       },
     ],
@@ -94,9 +213,9 @@ export default function DashMain() {
     <div className="dashMain">
         {/* <h1>Welcome To The DashBoard...</h1> */}
     <div className="cardsContainer">
-      <MainDashCards title='users' amount='50' />
-      <MainDashCards title='tours' amount='70' />
-      <MainDashCards title='booking' amount='120' />
+      <MainDashCards title='users' amount= {users.length} />
+      <MainDashCards title='tours' amount= {tours.length} />
+      <MainDashCards title='booking' amount= {booking.length} />
     </div>
         <div className="chartContainer">
           <div className="barChart">
