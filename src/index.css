@@ -2468,7 +2468,32 @@ margin-top: 20px;
   color: #cc8809;
 }
 
+.paginationButtons{
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem ;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
 
+.paginationButtons a{
+  background-color: #ddb66d;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+.paginationButtons a:hover{
+  background-color: #cc8809;
+  color: #ffffff;
+}
+.paginationActive a{
+  background-color: #cc8809;
+  color: #ffffff;
+}
 
 /* responsiveness */
 /* responsiveness */

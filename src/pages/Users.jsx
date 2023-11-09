@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
+import ReactPaginate from 'react-paginate'
 
 
 export default function Users() {
@@ -15,11 +16,26 @@ export default function Users() {
   // let usersId = params.id;
 const navigate = useNavigate();
 const [isFetch, setIsFetch] = useState(false);
-const [tours, setTours] = useState([]);
+const [users, setUser] = useState([]);
+const [usersPageNumber, setUsersPagenumber] = useState(0);
+const usersPerPage = 16
+const visitedUserspage =  usersPageNumber * usersPerPage
+const displayUsersPage = users
+.slice(visitedUserspage, visitedUserspage + usersPerPage)
+.map((item) => {
+  return (<li className='tableList'>
+  <p className='dura'>{item.fullName}</p>
+  <p className='dura'>{item.email}</p>
+  <p className="dura">{item.role}</p>
+  <p className='acts'><BsFillPencilFill onClick={() => {
+    // alert("you clicked me!!!")
+    navigate(`/dashBoard/editUser/${item._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteUser(item._id)}/></p>
+</li>); 
+})
 
 let token = localStorage.getItem("token");
 
-const fetchTours = () => {
+const fetchUser = () => {
   setIsFetch(true);
   axios({
     method:"GET",
@@ -28,7 +44,7 @@ const fetchTours = () => {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) =>{
-    setTours(response.data);
+    setUser(response.data);
     setIsFetch(false);
     console.log(response)
   })
@@ -39,7 +55,7 @@ const fetchTours = () => {
 };
 
 useEffect(() =>{
-  fetchTours()
+  fetchUser()
 }, []);
 
 const handleDeleteUser = (id) => {
@@ -70,6 +86,12 @@ const handleDeleteUser = (id) => {
     })
   }
 }
+
+  const usersPageCount = Math.ceil(users.length / usersPerPage);
+  const changeUsersPage =({selected}) => {
+    setUsersPagenumber(selected);
+  };
+
   return (
     <div>
       <ToastContainer/>
@@ -80,17 +102,20 @@ const handleDeleteUser = (id) => {
           <p className='dura'>Role</p>
           <p className='acts'>actions</p>
         </li>
-        {/* map placement */}
-        {tours.map((item) => {
-          return (<li className='tableList'>
-          <p className='dura'>{item.fullName}</p>
-          <p className='dura'>{item.email}</p>
-          <p className="dura">{item.role}</p>
-          <p className='acts'><BsFillPencilFill onClick={() => {
-            // alert("you clicked me!!!")
-            navigate(`/dashBoard/editUser/${item._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteUser(item._id)}/></p>
-        </li>); 
-        })}
+        <li>
+          {displayUsersPage}
+          <ReactPaginate
+          previousLabel={"ahabanza"}
+          nextLabel={"ahakurikira"}
+          pageCount={usersPageCount}
+          onPageChange={changeUsersPage}
+          containerClassName={"paginationButtons"}
+          previousLinkClassName={"bttn"}
+          nextLinkClassName={"bttn"}
+          activeClassName={"paginationActive"}
+          />
+        </li>
+        
       </ul>
     </div>
   )

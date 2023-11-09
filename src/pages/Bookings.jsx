@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
+import ReactPaginate from 'react-paginate'
 
 
 export default function Bookings() {
@@ -17,6 +18,24 @@ export default function Bookings() {
 const navigate = useNavigate();
 const [fetch, setIsFetch] = useState();
 const [booking, setBooking] = useState([]);
+const [pageNumber, setPageNumber] = useState(0);
+const bookingPerPage = 8
+const visitedPage = pageNumber * bookingPerPage
+
+const displayBookings = booking
+.slice(visitedPage, visitedPage + bookingPerPage)
+.map((booking) => {
+  return (<li className='tableList'>
+  <p className='dura'>{booking.fullname}</p>
+  <p className='dura'>{booking.email}</p>
+  <p className="dura">{booking.phone}</p>
+  <p className="dura">{booking.date}</p>
+  <p className="dura">{booking.numberOfTickets}</p>
+  <p className='acts'><BsFillPencilFill onClick={() => {
+    // alert("you clicked me!!!")
+    navigate(`/dashBoard/editBooking/${booking._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteBooking(booking._id)}/></p>
+</li>); 
+})
 
 let token = localStorage.getItem("token");
 
@@ -68,6 +87,12 @@ const handleDeleteBooking = (id) => {
     })
   }
 }
+
+    const bookingPageCount = Math.ceil(booking.length / bookingPerPage);
+    const changeBookingPage = ({selected}) =>{
+      setPageNumber(selected);
+    };
+    
   return (
     <div>
       <ToastContainer/>
@@ -80,19 +105,20 @@ const handleDeleteBooking = (id) => {
           <p className='dura'>Number Of Tickets</p>
           <p className='acts'>actions</p>
         </li>
-        {/* map placement */}
-        {booking.map((booking) => {
-          return (<li className='tableList'>
-          <p className='dura'>{booking.fullname}</p>
-          <p className='dura'>{booking.email}</p>
-          <p className="dura">{booking.phone}</p>
-          <p className="dura">{booking.date}</p>
-          <p className="dura">{booking.numberOfTickets}</p>
-          <p className='acts'><BsFillPencilFill onClick={() => {
-            // alert("you clicked me!!!")
-            navigate(`/dashBoard/editBooking/${booking._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteBooking(booking._id)}/></p>
-        </li>); 
-        })}
+        <li>
+          {displayBookings}
+          <ReactPaginate
+            previousLabel={"ahabanza"}
+            nextLabel={"ahakurikira"}
+            pageCount={bookingPageCount}
+            onPageChange={changeBookingPage}
+            containerClassName={"paginationButtons"}
+            previousLinkClassName={"bttn"}
+            nextLinkClassName={"bttn"}
+            // disabledClassName={"paginationDisable"}
+            activeClassName={"paginationActive"}
+          />
+        </li>
       </ul>
     </div>
   )

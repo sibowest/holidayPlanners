@@ -7,12 +7,31 @@ import {BsFillPlusCircleFill} from 'react-icons/bs'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
+import ReactPaginate from 'react-paginate'
 
 
 export default function DashTable() {
 const navigate = useNavigate();
 const [isFetch, setIsFetch] = useState(false);
 const [tours, setTours] = useState([]);
+const [pageTourNumber, setPageTourNumber] = useState(0);
+const toursPerPage = 8
+const visitedTourPage = pageTourNumber * toursPerPage
+const displayTours = tours
+.slice(visitedTourPage, visitedTourPage + toursPerPage)
+.map((item) => {
+  return (<li className='tableList'>
+  <p className='dest'><img src={item.backdropImage} alt="Desti-View" className='dest backdropImage'/></p>
+  
+  <p className='dura'>{item.destination}</p>
+  <p className='dura'>{item.Duration}</p>
+  <p className='gsize'>{item.GroupSize}</p>
+  <p className='price'>{item.Price}</p>
+  <p className='acts'><BsFillPencilFill onClick={() => {
+    // alert("you clicked me!!!")
+    navigate(`/dashBoard/editTour/${item._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteTour(item._id)}/></p>
+</li>); 
+})
 
 
 let token = localStorage.getItem("token");
@@ -65,6 +84,12 @@ const handleDeleteTour = (id) => {
     })
   }
 }
+
+  const tourPageCount = Math.ceil(tours.length / toursPerPage);
+  const changeTourPage = ({selected}) => {
+    setPageTourNumber(selected);
+  };
+
   return (
     <div>
       <ToastContainer/>
@@ -80,20 +105,19 @@ const handleDeleteTour = (id) => {
           <p className='price'>price</p>
           <p className='acts'>actions</p>
         </li>
-        {/* map placement */}
-        {tours.map((item) => {
-          return (<li className='tableList'>
-          <p className='dest'><img src={item.backdropImage} alt="Desti-View" className='dest backdropImage'/></p>
-          
-          <p className='dura'>{item.destination}</p>
-          <p className='dura'>{item.Duration}</p>
-          <p className='gsize'>{item.GroupSize}</p>
-          <p className='price'>{item.Price}</p>
-          <p className='acts'><BsFillPencilFill onClick={() => {
-            // alert("you clicked me!!!")
-            navigate(`/dashBoard/editTour/${item._id}`)}} className='pencilon'/><MdDelete className='deleteon' onClick={() =>handleDeleteTour(item._id)}/></p>
-        </li>); 
-        })}
+        <li>
+          {displayTours}
+          <ReactPaginate
+          prevPageRel={"ahabanza"}
+          nextLabel={"ahakurikira"}
+          pageCount={tourPageCount}
+          onPageChange ={changeTourPage}
+          containerClassName={"paginationButtons"}
+          previousLinkClassName={"bttn"}
+          nextLinkClassName={"bttn"}
+          activeClassName={"paginationActive"}
+          />
+        </li>
       </ul>
     </div>
   )
