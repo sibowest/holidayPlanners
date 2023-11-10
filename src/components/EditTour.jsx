@@ -5,10 +5,11 @@ import { ToastContainer,toast } from "react-toastify"
 import{useParams} from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom"
+import { ThreeCircles } from "react-loader-spinner"
 
 
 const EditTour = () => {
-     
+     const [isLoading, setIsLoading] = useState(false);
     const params = useParams()
     let tourId = params.id
     
@@ -71,6 +72,7 @@ const EditTour = () => {
 
     const handleForm = (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         let token = localStorage.getItem("token")
 
@@ -103,6 +105,7 @@ const EditTour = () => {
             console.log(response);
 
             toast.success(response.data.message);
+            setIsLoading(false);
             setTimeout(() => {
                 navigate("/dashBoard/table");
             },3000)
@@ -111,6 +114,7 @@ const EditTour = () => {
         .catch((error) => {
             // console.log(error);
             toast.error(error.message);
+            setIsLoading(false);
         })
     }
     return (
@@ -178,7 +182,18 @@ const EditTour = () => {
         
             {/* <label htmlFor="">phone</label>
             <input type="text" placeholder="Contact number"/> */}
-            <button className="addTourbu" onClick={handleForm}>update tour</button>
+            <button className="addTourbu" onClick={handleForm}>{isLoading ? <ThreeCircles
+  height="50"
+  width="100"
+  color="#4fa94d"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+  ariaLabel="three-circles-rotating"
+  outerCircleColor="black"
+  innerCircleColor="grey"
+  middleCircleColor="#ffff"
+/>: "update tour"}</button>
         </form>
         </>
     );

@@ -4,10 +4,11 @@ import { useState } from "react"
 import { ToastContainer,toast } from "react-toastify"
 import{useNavigate, useParams} from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
+import { ThreeCircles } from "react-loader-spinner"
 
 
 const EditBooking = () => {
-     
+     const [isLoading, setIsLoading] = useState(false);
     const params = useParams()
     let id = params.id
     // alert(tourId)
@@ -21,6 +22,7 @@ const EditBooking = () => {
 
     
     const fetchBooking = () =>{
+    
         // console.log("West")
         let token = localStorage.getItem("token")
         axios({
@@ -52,7 +54,7 @@ const EditBooking = () => {
 
     const handleBookingForm = (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
         let token = localStorage.getItem("token")
 
         const Data = {
@@ -77,6 +79,7 @@ const EditBooking = () => {
             console.log(response);
             toast.success("Update Booking Successfully!!!")
             toast.success(response.data.message);
+            setIsLoading(false);
             setTimeout(() => {
                 navigate("/dashBoard/bookings");
             },3000)
@@ -85,6 +88,7 @@ const EditBooking = () => {
         .catch((error) => {
             // console.log(error);
             toast.error(error.message);
+            setIsLoading(false);
         })
     }
     return (
@@ -112,13 +116,24 @@ const EditBooking = () => {
                  <label htmlFor="">date</label>
                 <input 
                 value={date}
-                type="date" onChange={(e) => {setDate(e.target.value)}} placeholder="Update User Title"/>
+                type="date" onChange={(e) => {setDate(e.target.value)}}/>
 
                 <label htmlFor="">number of tickets</label>
                 <input 
                 value={numberOfTickets}
-                type="text" onChange={(e) => {setNumberOfTickets(e.target.value)}} placeholder="Update User Title"/>
-            <button className="addTourbu" onClick={handleBookingForm}>update booking tour</button>
+                type="text" onChange={(e) => {setNumberOfTickets(e.target.value)}} placeholder="Update number of tickets"/>
+            <button className="addTourbu" onClick={handleBookingForm}>{isLoading ? <ThreeCircles
+  height="50"
+  width="100"
+  color="#4fa94d"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+  ariaLabel="three-circles-rotating"
+  outerCircleColor="black"
+  innerCircleColor="#cc8809"
+  middleCircleColor="#ffff"
+/>: "update booking tour"}</button>
         </form>
         </>
     );

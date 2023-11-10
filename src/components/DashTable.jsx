@@ -8,9 +8,12 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import ReactPaginate from 'react-paginate'
+import { InfinitySpin } from 'react-loader-spinner'
+import {Rings} from 'react-loader-spinner'
 
 
 export default function DashTable() {
+  const [isLoading, setIsLoading] = useState(false);
 const navigate = useNavigate();
 const [isFetch, setIsFetch] = useState(false);
 const [tours, setTours] = useState([]);
@@ -37,6 +40,7 @@ const displayTours = tours
 let token = localStorage.getItem("token");
 
 const fetchTours = () => {
+  setIsLoading(true);
   setIsFetch(true);
   axios({
     method:"GET",
@@ -46,12 +50,14 @@ const fetchTours = () => {
     },
   }).then((response) =>{
     setTours(response.data);
+    setIsLoading(false);
     setIsFetch(false);
     console.log(response)
   })
   .catch((error) =>{
     console.log(error)
     alert("Error showed up!!!");
+    setIsLoading(false);
   })
 };
 
@@ -92,33 +98,45 @@ const handleDeleteTour = (id) => {
 
   return (
     <div>
-      <ToastContainer/>
-      <ul className="DashTable1">
-        <div className="addTour">
-         <Link to="/dashBoard/addTour" className="addTourbutoon"><button className="addTourbut"><BsFillPlusCircleFill className="addTourbuton"/>add tour</button></Link>
-        </div>
-        <li className='tableHeads'>
-          <p className='dest'>destination view</p>
-          <p className='dest'>destination</p>
-          <p className='dura'>duration</p>
-          <p className='gsize'>group size</p>
-          <p className='price'>price</p>
-          <p className='acts'>actions</p>
-        </li>
-        <li>
-          {displayTours}
-          <ReactPaginate
-          prevPageRel={"ahabanza"}
-          nextLabel={"ahakurikira"}
-          pageCount={tourPageCount}
-          onPageChange ={changeTourPage}
-          containerClassName={"paginationButtons"}
-          previousLinkClassName={"bttn"}
-          nextLinkClassName={"bttn"}
-          activeClassName={"paginationActive"}
-          />
-        </li>
-      </ul>
+      {isLoading ? <Rings
+            // width="4500"
+            // height="1000"
+            color=" #cc8809"
+            radius="6"
+            wrapperStyle={{}}
+            wrapperClass="rings-wrapper"
+            visible={true}
+            ariaLabel="rings-loading"
+          /> : 
+          <ul className="DashTable1">
+            
+            <div className="addTour">
+             <Link to="/dashBoard/addTour" className="addTourbutoon"><button className="addTourbut"><BsFillPlusCircleFill className="addTourbuton"/>add tour</button></Link>
+            </div>
+            <li className='tableHeads'>
+              <p className='dest'>destination view</p>
+              <p className='dest'>destination</p>
+              <p className='dura'>duration</p>
+              <p className='gsize'>group size</p>
+              <p className='price'>price</p>
+              <p className='acts'>actions</p>
+            </li>
+            <li>
+              {displayTours}
+              <ReactPaginate
+              prevPageRel={"Prev"}
+              nextLabel={"Next"}
+              pageCount={tourPageCount}
+              onPageChange ={changeTourPage}
+              containerClassName={"paginationButtons"}
+              previousLinkClassName={"bttn"}
+              nextLinkClassName={"bttn"}
+              activeClassName={"paginationActive"}
+              />
+            </li>
+          </ul>
+          }
+      
     </div>
   )
 }

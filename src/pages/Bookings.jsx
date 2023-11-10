@@ -9,12 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
+import { Vortex } from 'react-loader-spinner'
 
 
 export default function Bookings() {
   // const params = useParams()
   // let usersId = params.id;
-
+const [isLoading, setIsLoading] = useState(false);
 const navigate = useNavigate();
 const [fetch, setIsFetch] = useState();
 const [booking, setBooking] = useState([]);
@@ -41,6 +42,7 @@ let token = localStorage.getItem("token");
 
 const fetchBooking = () => {
   setIsFetch(true);
+  setIsLoading(true);
   axios({
     method:"GET",
     url:"https://holiday-planner-4lnj.onrender.com/api/v1/booking/view",
@@ -48,10 +50,12 @@ const fetchBooking = () => {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) =>{
+    setIsLoading(false);
     setBooking(response.data);
     console.log(response)
   })
   .catch((error) =>{
+    setIsLoading(false)
     console.log(error)
     alert("Error showed up!!!");
     toast.error(error.message);
@@ -95,7 +99,16 @@ const handleDeleteBooking = (id) => {
     
   return (
     <div>
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
+      {isLoading ? <Vortex
+          visible={true}
+          // height="900"
+          // width="1700"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{}}
+          wrapperClass="vortex-wrapper"
+          colors={['#c29d59d2', 'lightgrey', '#c29d59d2', 'lightgrey', '#c29d59d2', 'lightgrey']}
+      />: 
       <ul className="DashTable1">
         <li className='tableHeads'>
           <p className='dest'>full name</p>
@@ -108,8 +121,8 @@ const handleDeleteBooking = (id) => {
         <li>
           {displayBookings}
           <ReactPaginate
-            previousLabel={"ahabanza"}
-            nextLabel={"ahakurikira"}
+            previousLabel={"Prev"}
+            nextLabel={"Next"}
             pageCount={bookingPageCount}
             onPageChange={changeBookingPage}
             containerClassName={"paginationButtons"}
@@ -120,6 +133,7 @@ const handleDeleteBooking = (id) => {
           />
         </li>
       </ul>
+      }
     </div>
   )
 }

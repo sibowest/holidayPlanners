@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Rings } from 'react-loader-spinner';
 
     const LoginForm = () => {
       
@@ -31,6 +32,7 @@ import 'react-toastify/dist/ReactToastify.css';
         console.log(Response)
           localStorage.setItem("token", Response.data.access_token);
           toast.success("Thanks for logging in!!!");
+          setIsLoading(false);
 
           localStorage.setItem("user", JSON.stringify(Response.data.user));
           console.log(
@@ -52,6 +54,7 @@ import 'react-toastify/dist/ReactToastify.css';
       .catch((error) => {
           console.log(error)
           toast.error("Oops, login failed!!!");
+          setIsLoading(false);
       })
   }
   return (
@@ -87,7 +90,16 @@ import 'react-toastify/dist/ReactToastify.css';
           </label>
           <button 
            onClick={(e) => handlelogin(e)}
-          className='loginButton'>{isLoading ? "loging you in..." : "login"}</button>
+          className='loginButton'>{isLoading ? <Rings
+            height="80"
+            width="80"
+            color="#ffff"
+            radius="6"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="rings-loading"
+          /> : "login"}</button>
           <div className="logmedia">
           <button className='loggoogleButton'><FcGoogle className='loginos'/>Google</button>
           <button className='loginfacebookButton'><BiLogoFacebook className='loginos'/>facebook</button>

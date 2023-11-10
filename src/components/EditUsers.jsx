@@ -3,12 +3,12 @@ import axios from "axios"
 import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import { useParams } from 'react-router-dom'
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from "react-router-dom"
-
+import { ThreeCircles } from "react-loader-spinner"
 
 const EditUsers = () => {
-
+    const [isLoading, setIsLoading] = useState(false);
     const params = useParams()
     let id = params.id
 
@@ -45,6 +45,7 @@ const EditUsers = () => {
 
     const handleForm = (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         let token = localStorage.getItem("token")
 
@@ -69,6 +70,7 @@ console.log(email, "email")
             .then((response) => {
                 console.log(response);
                 toast.success("Update user successfully");
+                setIsLoading(false);
                 setTimeout(() => {
                     navigate("/dashBoard/users");
                 }, 3000)
@@ -77,6 +79,7 @@ console.log(email, "email")
             .catch((error) => {
                 // console.log(error);
                 toast.error(error.message);
+                setIsLoading(false);
             })
     }
     return (
@@ -99,8 +102,21 @@ console.log(email, "email")
                 <label htmlFor="">role</label>
                 <input
                     value={role}
-                    type="text" onChange={(e) => { setRole(e.target.value) }} placeholder="Update User Title" />
-                <button className="addTourbu" onClick={handleForm}>update user credes</button>
+                    type="text" onChange={(e) => { setRole(e.target.value) }} placeholder="Update Role" />
+                <button className="addTourbu" onClick={handleForm}>
+                {isLoading ? <ThreeCircles
+  height="50"
+  width="100"
+  color="#4fa94d"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+  ariaLabel="three-circles-rotating"
+  outerCircleColor="black"
+  innerCircleColor="#cc8809"
+  middleCircleColor="#ffff"
+/>: "update user credes"}
+                    </button>
             </form>
         </>
     );

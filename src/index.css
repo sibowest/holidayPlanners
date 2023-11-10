@@ -1479,7 +1479,10 @@ margin-top: 20px;
 }
 .loginButton{
   width: 58%;
-  height: 2rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -2102,9 +2105,9 @@ margin-top: 20px;
   /* color: #000; */
 }
 .addtourtoast{
-  position: absolute;
-  top: -2rem;
-  left: 35rem;
+  position: fixed;
+  top: 0rem;
+  left: 40rem;
   /* margin-top: 5rem; */
 }
 
@@ -2166,6 +2169,10 @@ margin-top: 20px;
   background-color: #C29D59;
   width: 100%!important;
   height: 3.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin-top: 1rem!important;
   text-transform: uppercase;
   font-size: 17px;
@@ -2494,6 +2501,37 @@ margin-top: 20px;
   background-color: #cc8809;
   color: #ffffff;
 }
+.loading{
+  /* width: 20%!important; */
+  /* z-index: 2!important; */
+}
+.vortex-wrapper{
+  /* background-color: blue!important; */
+  width: 20%!important;
+  height: 10rem!important;
+  position: fixed;
+  left: 45rem;
+  top: 20rem;
+}
+.rings-wrapper{
+  width: 10%!important;
+  margin: 0 auto;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  position: fixed;
+  left: 50rem;
+  top: 20rem;
+}
+/* .triangle{
+  background-color: blue!important;
+  width: 100%!important;
+  height: 10rem!important;
+  position: fixed!important;
+  left: 25rem!important;
+  top: 55rem!important;
+} */
+
 
 /* responsiveness */
 /* responsiveness */
@@ -5382,7 +5420,34 @@ span{
   .linktotable:hover{
     color: #cc8809;
   }
-}
+
+
+  .paginationButtons{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem ;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .paginationButtons a{
+    background-color: #ddb66d;
+    padding: 3px;
+    margin: 1px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+  .paginationButtons a:hover{
+    background-color: #cc8809;
+    color: #ffffff;
+  }
+  .paginationActive a{
+    background-color: #cc8809;
+    color: #ffffff;
+  }}
 
 
 /* Responsiveness  for big SmartPhone*/
@@ -8249,7 +8314,35 @@ span{
     color: #cc8809;
   }
 
-}
+
+  .paginationButtons{
+    /* background-color: red!important; */
+    /* width: 70%!important; */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0 4rem 0;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .paginationButtons a{
+    background-color: #ddb66d;
+    padding: 5px;
+    margin: 4px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+  .paginationButtons a:hover{
+    background-color: #cc8809;
+    color: #ffffff;
+  }
+  .paginationActive a{
+    background-color: #cc8809;
+    color: #ffffff;
+  }}
 
 /* Responsiveness  for tablets*/
 /* Responsiveness  for tablets*/
@@ -11182,4 +11275,30 @@ span{
     color: #cc8809;
   }
 
-}
+
+  .paginationButtons{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0  5rem 0;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .paginationButtons a{
+    background-color: #ddb66d;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+  .paginationButtons a:hover{
+    background-color: #cc8809;
+    color: #ffffff;
+  }
+  .paginationActive a{
+    background-color: #cc8809;
+    color: #ffffff;
+  }}

@@ -27,7 +27,7 @@ export default function DashSide() {
         <Link to='/'><img src={dashBoard} alt="" className="backHomebut" /></Link>
       </div>
       <ul className="dashNav">
-        <li className="dashNavList"><RiDashboard3Fill className='dashNavListcons'/> <Link to="/dashBoard" className='linktotable'>DashBoard</Link></li>
+        <li className="dashNavList"><RiDashboard3Fill className='dashNavListcons'/><Link to="/dashBoard" className='linktotable'>DashBoard</Link></li>
         <li className="dashNavList"><TbTournament className='dashNavListcons'/><Link to='table' className='linktotable'>Tours</Link></li>
         <li className="dashNavList"><MdAirplaneTicket className='dashNavListcons'/><Link to='bookings' className='linktotable'>Bookings</Link></li>
         <li className="dashNavList"><HiUserGroup className='dashNavListcons'/><Link to='users' className='linktotable'>Users</Link></li>

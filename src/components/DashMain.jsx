@@ -4,7 +4,7 @@ import MainDashCards from '../components/MainDashCards'
 import { Pie } from 'react-chartjs-2';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { InfinitySpin } from 'react-loader-spinner';
 import { Chart as ChartJS,
   ArcElement,
   CategoryScale,
@@ -29,12 +29,15 @@ ChartJS.register(
 
 export default function DashMain() {
 
+const [isLoading, setIsLoading] = useState(false)
+
 // display UsersCards
 
 const [users, setUsers] = useState([]);
 
 
 const fetchUsers = () => {
+  setIsLoading(true);
   axios({
     method:"GET",
     url:"https://holiday-planner-4lnj.onrender.com/api/v1/auth/users",
@@ -43,16 +46,18 @@ const fetchUsers = () => {
     },
   }).then((response) =>{
     setUsers(response.data);
+    setIsLoading(false);
     console.log(response)
   })
   .catch((error) =>{
+    setIsLoading(false);
     console.log(error)
     alert("Error showed up!!!");
   })
 };
 
 useEffect(() =>{
-  fetchUsers()
+  fetchUsers();
 }, []);
 
 
@@ -67,6 +72,7 @@ const [tours, setTours] = useState([]);
 let token = localStorage.getItem("token");
 
 const fetchTours = () => {
+  setIsLoading(true);
   axios({
     method:"GET",
     url:"https://holiday-planner-4lnj.onrender.com/api/v1/tour/",
@@ -75,9 +81,11 @@ const fetchTours = () => {
     },
   }).then((response) =>{
     setTours(response.data);
+    setIsLoading(false);
     console.log(response)
   })
   .catch((error) =>{
+    setIsLoading(false);
     console.log(error)
     alert("Error showed up!!!");
   })
@@ -96,6 +104,7 @@ const [booking, setBooking] = useState([]);
 
 
 const fetchBooking = () => {
+  setIsLoading(true);
   setIsFetch(true);
   axios({
     method:"GET",
@@ -105,11 +114,13 @@ const fetchBooking = () => {
     },
   }).then((response) =>{
     setBooking(response.data);
+    setIsLoading(false);
     console.log(response)
   })
   .catch((error) =>{
     console.log(error)
     alert("Error showed up!!!");
+    setIsLoading(false);
     toast.error(error.message);
   });
 };
@@ -210,8 +221,10 @@ useEffect(() =>{
   }
   return (
     <>
+    
     <div className="dashMain">
         {/* <h1>Welcome To The DashBoard...</h1> */}
+        
     <div className="cardsContainer">
       <MainDashCards title='users' amount= {users.length} />
       <MainDashCards title='tours' amount= {tours.length} />

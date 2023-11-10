@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
+import { Triangle } from 'react-loader-spinner'
 
 
 export default function Users() {
   // const params = useParams()
   // let usersId = params.id;
+const [isLoading, setIsLoading] = useState(false);
 const navigate = useNavigate();
 const [isFetch, setIsFetch] = useState(false);
 const [users, setUser] = useState([]);
@@ -36,6 +38,7 @@ const displayUsersPage = users
 let token = localStorage.getItem("token");
 
 const fetchUser = () => {
+  setIsLoading(true);
   setIsFetch(true);
   axios({
     method:"GET",
@@ -46,10 +49,12 @@ const fetchUser = () => {
   }).then((response) =>{
     setUser(response.data);
     setIsFetch(false);
+    setIsLoading(false);
     console.log(response)
   })
   .catch((error) =>{
     console.log(error)
+    setIsLoading(false);
     alert("Error showed up!!!");
   })
 };
@@ -94,29 +99,40 @@ const handleDeleteUser = (id) => {
 
   return (
     <div>
-      <ToastContainer/>
-      <ul className="DashTable1">
-        <li className='tableHeads'>
-          <p className='dest'>full name</p>
-          <p className='dest'>Email</p>
-          <p className='dura'>Role</p>
-          <p className='acts'>actions</p>
-        </li>
-        <li>
-          {displayUsersPage}
-          <ReactPaginate
-          previousLabel={"ahabanza"}
-          nextLabel={"ahakurikira"}
-          pageCount={usersPageCount}
-          onPageChange={changeUsersPage}
-          containerClassName={"paginationButtons"}
-          previousLinkClassName={"bttn"}
-          nextLinkClassName={"bttn"}
-          activeClassName={"paginationActive"}
-          />
-        </li>
-        
-      </ul>
+      {isLoading ? <Triangle
+          color="#cc8809"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{
+          position:"fixed",
+          top:"25rem",
+          left:"55rem"
+        }}
+          wrapperClassName="triangle"
+          visible={true}
+        />:
+        <ul className="DashTable1">
+          <li className='tableHeads'>
+            <p className='dest'>full name</p>
+            <p className='dest'>Email</p>
+            <p className='dura'>Role</p>
+            <p className='acts'>actions</p>
+          </li>
+          <li>
+            {displayUsersPage}
+            <ReactPaginate
+            previousLabel={"Prev"}
+            nextLabel={"Next"}
+            pageCount={usersPageCount}
+            onPageChange={changeUsersPage}
+            containerClassName={"paginationButtons"}
+            previousLinkClassName={"bttn"}
+            nextLinkClassName={"bttn"}
+            activeClassName={"paginationActive"}
+            />
+          </li>
+          
+        </ul>
+      }
     </div>
   )
 }

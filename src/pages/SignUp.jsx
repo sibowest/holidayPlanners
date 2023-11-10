@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { InfinitySpin } from 'react-loader-spinner';
 const SignUp = () => {
     const navigate = useNavigate();
     const [fullName, setFullNames] = useState("");
@@ -38,6 +38,7 @@ const SignUp = () => {
         .catch((error) => {
             console.log(error)
             toast.error('failed to signup!!!');
+            setIsLoading(false);
         })
     }
     return (
@@ -81,7 +82,10 @@ const SignUp = () => {
             </label>
             <button 
             onClick={(e) => handleSignup(e)}
-            className='loginButton'>{isLoading ? "Signing you up..." : "Sign up"}</button>
+            className='loginButton'>{isLoading ? <InfinitySpin 
+                width='200'
+                color="#ffff"
+              className="loading"/> : "Sign up"}</button>
             <div className="logmedia">
             <button className='loggoogleButton'><FcGoogle className='loginos'/>Google</button>
             <button className='loginfacebookButton'><BiLogoFacebook className='loginos'/>facebook</button>
